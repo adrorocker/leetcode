@@ -9,23 +9,18 @@ class Solution
      */
     public function twoSum($nums, $target)
     {
-        $indexes = null;
+        $hashMap = [];
 
         for ($i = 0; $i < count($nums); $i++) {
-            if ($indexes) {
-                break;
+            $complement = $target - $nums[$i];
+
+            if (isset($hashMap[$complement])) {
+                return [$hashMap[$complement], $i];
             }
-            for ($j = 0; $j < count($nums); $j++) {
-                if ($i === $j) {
-                    continue;
-                }
-                if ($nums[$i] + $nums[$j] === $target) {
-                    $indexes = [$i,$j];
-                    break;
-                }
-            }
+
+            $hashMap[$nums[$i]] = $i;
         }
 
-        return $indexes;
+        throw new \Exception("No two sum solution", 500);
     }
 }
